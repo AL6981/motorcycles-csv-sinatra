@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Best Boston Brunch</title>
+  </head>
+
+  <body>
+    <h2>Best Boston Brunches</h2>
+
+    <ul>
+      <% @restaurants.each do |restaurant| %>
+        <li><a href="/restaurant/<%= restaurant["id"] %>"><%= restaurant["name"] %></a></li>
+      <% end %>
+    </ul>
+
+  </body>
+</html>
