@@ -5,13 +5,12 @@ require_relative 'app/restaurant.rb'
 
 set :bind,'0.0.0.0'  # bind to all interfaces,http://www.sinatrarb.com/configuration.html
 
-def restaurants
-  @restaurants = []
-  restaurant_data = CSV.readlines('restaurants.csv',headers: true)
-  restaurant_data.each do |r|
-    @restaurants << Restaurant.new(r["id"], r["name"], r["address"], r["description"], r["url"], r["image"])
+def array_of_restaurant_objects
+  restaurants = []
+  CSV.foreach('restaurants.csv', headers: true) do |row|
+    restaurants << Restaurant.new(row["id"], row["name"], row["address"], row["description"], row["url"], row["image"])
   end
-  @restaurants
+  restaurants
 end
 
 get '/' do
@@ -19,11 +18,11 @@ get '/' do
 end
 
 get '/restaurants' do
-  @restaurants = restaurants
+  @restaurants = array_of_restaurant_objects
   erb :index
 end
 
 get '/restaurant/:id' do
-  @restaurant = restaurants[params[:id].to_i]
+  @restaurant = array_of_restaurant_objects.find { |r| r.id == params[:id]}
   erb :show
 end
