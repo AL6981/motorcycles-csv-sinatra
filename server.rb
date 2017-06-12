@@ -26,3 +26,14 @@ get '/restaurant/:id' do
   @restaurant = array_of_restaurant_objects.find { |r| r.id == params[:id]}
   erb :show
 end
+
+get "/restaurants/new" do
+  erb :new
+end
+
+post '/restaurants' do
+  CSV.open("restaurants.csv", "a") do |csv|
+    csv << [array_of_restaurant_objects.length + 1, params[:name], params[:address],"#{params[:description]}",params[:url],params[:image]]
+  end
+  redirect to "/"
+end
