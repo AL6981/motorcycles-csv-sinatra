@@ -1,11 +1,13 @@
-<h1><%= @restaurant.name %></h1>
-<h4><%= @restaurant.address %></h4>
 
-<p><%= @restaurant.description %></p>
 
-<a href="<%= @restaurant.url %>"><%= @restaurant.url %></a><br><br>
-<img src="<%= @restaurant.image %>" height="400px"></img><br><br>
+<h1> <%= @motorcycle.make %> </h1>
+<h4> <%= @motorcycle.year %> <br> <%= @motorcycle.model %> </h4>
 
-<br><br>
+<p> <%= "#{@motorcycle.cc} cc's" %> <br> <%= @motorcycle.description %> </p>
 
-<a class="back" href="/">Back to All Brunch Spots</a>
+<a href="<%= @motorcycle.url %>"> <%= @motorcycle.url %> </a> <br> <br>
+<img src="<%= @motorcycle.image %>" height="400px"> </img> <br> <br>
+
+<br> <br>
+
+<a href="/" class="back"> Back to All Motorcycles </a>

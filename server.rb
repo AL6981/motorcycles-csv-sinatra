@@ -1,39 +1,40 @@
 require 'sinatra'
 require 'pry'
 require 'csv'
-require_relative 'app/restaurant.rb'
+require_relative 'app/motorcycle.rb'
 
 set :bind,'0.0.0.0'  # bind to all interfaces,http://www.sinatrarb.com/configuration.html
 
-def array_of_restaurant_objects
-  restaurants = []
-  CSV.foreach('restaurants.csv', headers: true) do |row|
-    restaurants << Restaurant.new(row["id"], row["name"], row["address"], row["description"], row["url"], row["image"])
+def array_of_motorcycle_objects
+  motorcycles = []
+  CSV.foreach('motorcycles.csv', headers: true) do |row|
+    motorcycles << Motorcycle.new(row["id"], row["year"], row["make"], row["model"], row["description"], row["cc"], row["url"], row["image"])
   end
-  restaurants
+  motorcycles
 end
 
 get '/' do
-  redirect to "/restaurants"
+  redirect to "/motorcycles"
+  # user experiences more clarity
 end
 
-get '/restaurants' do
-  @restaurants = array_of_restaurant_objects
+get '/motorcycles' do
+  @motorcycles = array_of_motorcycle_objects
   erb :index
 end
 
-get '/restaurant/:id' do
-  @restaurant = array_of_restaurant_objects.find { |r| r.id == params[:id]}
+get '/motorcycle/:id' do
+  @motorcycle = array_of_motorcycle_objects.find { |r| r.id == params[:id]}
   erb :show
 end
 
-get "/restaurants/new" do
+get "/motorcycles/new" do
   erb :new
 end
 
-post '/restaurants' do
-  CSV.open("restaurants.csv", "a") do |csv|
-    csv << [array_of_restaurant_objects.length + 1, params[:name], params[:address],"#{params[:description]}",params[:url],params[:image]]
+post '/motorcycles' do
+  CSV.open("motorcycles.csv", "a") do |csv|
+    csv << [array_of_motorcycle_objects.length + 1, params[:year],params[:make], params[:model],"#{params[:description]}",params[:cc],params[:url],params[:image]]
   end
   redirect to "/"
 end

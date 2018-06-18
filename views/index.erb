@@ -1,7 +1,14 @@
-<h1>Boston's Best Brunch</h1>
+<h1>AL's Fav Motorcycles</h1>
 
-<% @restaurants.each do |restaurant| %>
-  <h4><a href="/restaurant/<%= restaurant.id %>"><%= restaurant.name %></a></h4>
+<% @motorcycles.each do |motorcycle| %>
+
+  <h4> 
+    <a href="/motorcycle/<%= motorcycle.id %>" >
+      <%= motorcycle.year %> 
+      <%= motorcycle.make %>
+      <%= motorcycle.model %>
+    </a>
+  </h4>
 <% end %>
 
-<h4 class="new"><a href="/restaurants/new">Add a New Brunch Spot</a></h4>
+<h4 class="new"><a href="/motorcycles/new">Add a New Motorcycle</a></h4>
